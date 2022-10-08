@@ -1,0 +1,146 @@
+BEGIN_DESC
+This is an demonstration of intercepting the ISS from a parabola course with an dV of more then 4km/s by using the ENC- and BTC- MFD.
+END_DESC
+
+BEGIN_ENVIRONMENT
+  System Sol
+  Date MJD 51997.7157023426
+END_ENVIRONMENT
+
+BEGIN_FOCUS
+  Ship GL-02
+END_FOCUS
+
+BEGIN_CAMERA
+  TARGET GL-02
+  MODE Cockpit
+  FOV 50.00
+END_CAMERA
+
+BEGIN_HUD
+  TYPE Orbit
+  REF AUTO
+END_HUD
+
+BEGIN_MFD Left
+  TYPE User
+  MODE Interplanetary
+  MFDOpMode 0
+  MapMFD V5
+  Reference Auto
+  Target none
+  Center GravityRef
+  Data 0 1 1e-006 1 0 0 0 0 1 1 0
+  MassLimit 1e+020
+  CMode 0
+  Config 1 1 1 1 0 0
+  ExtMode 0
+  Periapis none
+  END MapMFD
+  CorMFD V4
+  Reference Auto
+  Target none
+  Source none
+  ActiveProg 0 3
+  Data 0 3 0 0 0 1 1 0 0 0 0 0 10 0 0
+  END CorMFD
+  EjectMFD V4
+  Reference Auto
+  Data 0 1 1 3 0 1 51997.70907426388 1 10
+  END EjectMFD
+  BaseAprMFD V2
+  Reference Auto
+  Target none
+  Source none
+  Data 0 0 120000 0.0523599 0.0872665 1 1 51997.70907426388 0 0 0 3 0 1 0 0
+  END TeiMFD
+  SlingMFD V4
+  Reference Auto
+  Source 
+  Data 0 1 1 3 0 1 51997.70907426388 0
+  END SlingMFD
+  Program 1
+  EscapeVector 0 0 0
+  EscapeWindow 0
+  TeiEscape 0 0 0
+  TeiWindow 0
+  FlyByEscape 0 0 0
+  FlyByTime 0
+END_MFD
+
+BEGIN_MFD Right
+  TYPE User
+  MODE Encounter
+END_MFD
+
+
+BEGIN_SHIPS
+ISS:ProjectAlpha_ISS
+  STATUS Orbiting Earth
+  RPOS 1726377.44 -6345595.72 1456558.23
+  RVEL -7298.609 -1566.842 1856.372
+  AROT -110.00 -15.00 -84.00
+  IDS 0:588 100 1:586 100 2:584 100 3:582 100 4:580 100
+  NAVFREQ 0 0
+  XPDR 466
+  FLIGHTDATA
+END
+Mir
+  STATUS Orbiting Earth
+  RPOS -5120631.05 261330.13 4272941.60
+  RVEL -4957.993 -361.721 -5914.555
+  AROT 0.00 -45.00 90.00
+  IDS 0:540 100 1:542 100 2:544 100
+  XPDR 482
+  FLIGHTDATA
+END
+Luna-OB1:Wheel
+  STATUS Orbiting Moon
+  RPOS -2033777.90 974865.95 -431.10
+  RVEL -637.608 -1329.526 -2.023
+  AROT 0.00 0.00 -35.92
+  VROT 0.00 0.00 10.00
+  IDS 0:560 100 1:564 100
+  XPDR 494
+  FLIGHTDATA
+END
+GL-01:DeltaGlider
+  STATUS Landed Earth
+  BASE Habana:2
+  POS -82.3988276 22.9994604
+  HEADING 174.13
+  PRPLEVEL 0:1.000 1:1.000
+  NAVFREQ 0 0 0 0
+  XPDR 0
+  FLIGHTDATA
+  GEAR 1 1.0000
+END
+GL-02:DeltaGlider
+  STATUS Orbiting Earth
+  RPOS -16495553.40 29444257.47 -5811780.46
+  RVEL 5342.770 -4874.858 459.774
+  AROT -81.09 -37.27 13.94
+  RCSMODE 2
+  PRPLEVEL 0:0.538 1:0.966
+  NAVFREQ 2 466 0 0
+  XPDR 0
+  FLIGHTDATA
+  RCOVER 1 1.0000
+  SKIN BLUE
+END
+SH-01:ShuttleA
+  STATUS Landed Moon
+  BASE Brighton Beach:1
+  POS -33.4375000 41.1184067
+  HEADING 0.00
+  PRPLEVEL 0:1.000 1:1.000
+  NAVFREQ 0 0
+  XPDR 0
+  FLIGHTDATA
+  PODANGLE 0.0000 0.0000
+  DOCKSTATE 0 0.0000
+  AIRLOCK 0 0.0000
+  GEAR 0 0.0000
+  PAYLOAD MASS 0.0 0
+END
+END_SHIPS

@@ -1,0 +1,231 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BurnTimeCalcMFD" />
+		<Option pch_mode="2" />
+		<Option compiler="msvc8" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../../Orbiter/orbiter2016/Modules/Plugin/BurnTimeMFD.dll" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="msvc8" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MTd" />
+					<Add option="/Zi" />
+					<Add option="/DBUILD_DLL" />
+					<Add option="/D_DEBUG" />
+					<Add directory="BurnTimeCalcMFD/src" />
+					<Add directory="lib/Orbiter" />
+				</Compiler>
+				<Linker>
+					<Add option="/debug" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="user32" />
+				</Linker>
+				<ExtraCommands>
+					<Add after='mt.exe /nologo /manifest &quot;bin\Debug\BurnTimeCalcMFD.dll.manifest&quot; /outputresource:&quot;bin\Debug\BurnTimeCalcMFD.dll&quot;;2' />
+				</ExtraCommands>
+			</Target>
+			<Target title="Release2010">
+				<Option output="../../../Orbiter/orbiter100830/Modules/Plugin/BurnTimeMFD.dll" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release2010/" />
+				<Option type="3" />
+				<Option compiler="msvc8" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MT" />
+					<Add option="/Ot" />
+					<Add option="/O2" />
+					<Add option="/DBUILD_DLL" />
+					<Add option="/DNDEBUG" />
+					<Add option="/DFIRST_INSTANCE" />
+					<Add directory="../../../Orbiter/orbiter100830/Orbitersdk/include" />
+					<Add directory="BurnTimeCalcMFD/src" />
+					<Add directory="lib/Orbiter" />
+				</Compiler>
+				<Linker>
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="user32" />
+					<Add directory="../../../Orbiter/orbiter100830/Orbitersdk/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release2010-MSVC2010">
+				<Option output="../../../Orbiter/orbiter100830/Modules/Plugin/BurnTimeMFD.dll" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release2010-MSVC2010/" />
+				<Option type="3" />
+				<Option compiler="msvc10" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MT" />
+					<Add option="/Ot" />
+					<Add option="/O2" />
+					<Add option="/DBUILD_DLL" />
+					<Add option="/DNDEBUG" />
+					<Add option="/DFIRST_INSTANCE" />
+					<Add directory="../../../Orbiter/orbiter100830/Orbitersdk/include" />
+					<Add directory="BurnTimeCalcMFD/src" />
+					<Add directory="lib/Orbiter" />
+				</Compiler>
+				<Linker>
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="user32" />
+					<Add directory="../../../Orbiter/orbiter100830/Orbitersdk/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release2016">
+				<Option output="../../../Orbiter/orbiter2016/Modules/Plugin/BurnTimeMFD.dll" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release2016/" />
+				<Option type="3" />
+				<Option compiler="msvc8" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MT" />
+					<Add option="/Ot" />
+					<Add option="/O2" />
+					<Add option="/DBUILD_DLL" />
+					<Add option="/DNDEBUG" />
+					<Add option="/DORB2016" />
+					<Add option="/DLANG_EN" />
+					<Add directory="../../../Orbiter/orbiter2016/Orbitersdk/include" />
+					<Add directory="../../../Orbiter/orbiter2016/Orbitersdk/include/lua" />
+					<Add directory="BurnTimeCalcMFD/src" />
+					<Add directory="lib/Orbiter" />
+				</Compiler>
+				<Linker>
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="user32" />
+					<Add directory="../../../Orbiter/orbiter2016/Orbitersdk/lib" />
+					<Add directory="../../../Orbiter/orbiter2016/Sound/OrbiterSound_SDK/MFDSOUND_SDK/MFDSound_Example" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="/TP" />
+			<Add option="/EHc" />
+			<Add option="/EHs" />
+			<Add option="/GR" />
+			<Add option="/Gy" />
+			<Add option="/GF" />
+			<Add option="/W3" />
+			<Add option="/EHsc" />
+			<Add directory="../lib" />
+			<Add directory="../libMFD" />
+			<Add directory="../KOST_Orbiter" />
+			<Add directory="../libWin" />
+			<Add directory="../" />
+		</Compiler>
+		<Linker>
+			<Add option="/NODEFAULTLIB:LIBCMT" />
+			<Add library="orbiter.lib" />
+			<Add library="orbitersdk.lib" />
+			<Add library="kernel32.lib" />
+			<Add library="user32.lib" />
+			<Add library="gdi32.lib" />
+			<Add library="winmm.lib" />
+		</Linker>
+		<Unit filename="../libMFD/MFDSound++/Sound.cpp" />
+		<Unit filename="../libMFD/MFDSound++/Sound.hpp" />
+		<Unit filename="../libMFD/MFDSound++/SoundMap.cpp" />
+		<Unit filename="../libMFD/MFDSound++/SoundMap.hpp" />
+		<Unit filename="../libMFD/Utils/MFDButtonPage.cpp" />
+		<Unit filename="../libMFD/Utils/mfdbuttonpage.hpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/MFDData.cpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/MFDData.hpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/PluginMultipleVessels.cpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/PluginMultipleVessels.hpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/SimulationTimeData.cpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/SimulationTimeData.hpp" />
+		<Unit filename="../lib/Math/VectorMath.cpp" />
+		<Unit filename="../lib/Math/VectorMath.hpp" />
+		<Unit filename="../lib/Orbiter/AngularAcc.cpp" />
+		<Unit filename="../lib/Orbiter/AngularAcc.hpp" />
+		<Unit filename="../lib/Orbiter/AutopilotRotation.cpp" />
+		<Unit filename="../lib/Orbiter/AutopilotRotation.hpp" />
+		<Unit filename="../lib/Orbiter/BurnTime.cpp" />
+		<Unit filename="../lib/Orbiter/BurnTime.hpp" />
+		<Unit filename="../lib/Orbiter/SpaceMathOrbiter.cpp" />
+		<Unit filename="../lib/Orbiter/SpaceMathOrbiter.hpp" />
+		<Unit filename="../lib/Orbiter/SystemsConverterOrbiter.cpp" />
+		<Unit filename="../lib/Orbiter/SystemsConverterOrbiter.hpp" />
+		<Unit filename="../lib/Orbiter/VesselCapabilities.cpp" />
+		<Unit filename="../lib/Orbiter/VesselCapabilities.hpp" />
+		<Unit filename="../lib/PID/DerivatorDiscrete.cpp" />
+		<Unit filename="../lib/PID/DerivatorDiscrete.hpp" />
+		<Unit filename="../lib/PID/IntegratorDiscrete.cpp" />
+		<Unit filename="../lib/PID/IntegratorDiscrete.hpp" />
+		<Unit filename="../lib/PID/PID.cpp" />
+		<Unit filename="../lib/PID/PID.hpp" />
+		<Unit filename="../lib/Systems/Geo.cpp" />
+		<Unit filename="../lib/Systems/Geo.hpp" />
+		<Unit filename="../lib/Systems/Point.cpp" />
+		<Unit filename="../lib/Systems/Point.hpp" />
+		<Unit filename="../lib/Systems/Spherical.cpp" />
+		<Unit filename="../lib/Systems/Spherical.hpp" />
+		<Unit filename="../lib/Systems/SystemsConverter.cpp" />
+		<Unit filename="../lib/Systems/SystemsConverter.hpp" />
+		<Unit filename="../lib/Systems/Vect3.cpp" />
+		<Unit filename="../lib/Systems/Vect3.hpp" />
+		<Unit filename="../lib/Util/CharManipulations.cpp" />
+		<Unit filename="../lib/Util/CharManipulations.hpp" />
+		<Unit filename="../lib/Util/FileUtils.cpp" />
+		<Unit filename="../lib/Util/FileUtils.hpp" />
+		<Unit filename="src/BurnTimeCalcMFD.rc">
+			<Option compilerVar="WINDRES" />
+		</Unit>
+		<Unit filename="src/BurnTimeMFD.cpp" />
+		<Unit filename="src/BurnTimeMFD.h" />
+		<Unit filename="src/Comms.cpp" />
+		<Unit filename="src/Comms.h" />
+		<Unit filename="src/DataSourceBase.cpp" />
+		<Unit filename="src/DataSourceBase.h" />
+		<Unit filename="src/DataSourceBaseSync.cpp" />
+		<Unit filename="src/DataSourceBaseSync.h" />
+		<Unit filename="src/DataSourceBaseSyncSimple.cpp" />
+		<Unit filename="src/DataSourceBaseSyncSimple.h" />
+		<Unit filename="src/DataSourceDummy.cpp" />
+		<Unit filename="src/DataSourceDummy.h" />
+		<Unit filename="src/DataSourceLagrange.cpp" />
+		<Unit filename="src/DataSourceLagrange.h" />
+		<Unit filename="src/DataSourceTransX.cpp" />
+		<Unit filename="src/DataSourceTransX.h" />
+		<Unit filename="src/Graph.cpp" />
+		<Unit filename="src/Graph.h" />
+		<Unit filename="src/InputBox.cpp" />
+		<Unit filename="src/InputBox.h" />
+		<Unit filename="src/MFDButtonPageBTC.cpp" />
+		<Unit filename="src/MFDButtonPageBTC.h" />
+		<Unit filename="src/MFDDataBurnTime.cpp" />
+		<Unit filename="src/MFDDataBurnTime.h" />
+		<Unit filename="src/PluginBurnTime.cpp" />
+		<Unit filename="src/PluginBurnTime.h" />
+		<Unit filename="src/SoundMapBTC.cpp" />
+		<Unit filename="src/SoundMapBTC.h" />
+		<Unit filename="src/SoundSampleIDEnum.cpp" />
+		<Unit filename="src/SoundSampleIDEnum.hpp" />
+		<Unit filename="src/afxres.h" />
+		<Unit filename="src/globals.h" />
+		<Unit filename="src/resource.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

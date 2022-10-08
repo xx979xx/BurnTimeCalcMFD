@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="Windows-1252"?>
+<VisualStudioPropertySheet
+	ProjectType="Visual C++"
+	Version="8.00"
+	Name="orbiterroot"
+	>
+	<UserMacro
+		Name="OrbiterDir"
+		Value="..\..\..\orbiter\orbiter2016\"
+		PerformEnvironmentSet="true"
+	/>
+	<UserMacro
+		Name="OrbiterDir2006"
+		Value="..\..\..\orbiter\orbiter060929\"
+	/>
+	<UserMacro
+		Name="OrbiterDirBETA"
+		Value="..\..\..\orbiter\orbiterBETA\"
+	/>
+	<UserMacro
+		Name="OrbiterDir2008"
+		Value="..\..\..\orbiter\orbiter100830"
+	/>
+</VisualStudioPropertySheet>

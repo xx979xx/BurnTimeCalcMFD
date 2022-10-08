@@ -1,0 +1,168 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ItemGroup>
+    <Filter Include="libMFD">
+      <UniqueIdentifier>{f9387b73-e974-41e2-846d-34518bfdf766}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libMFD\Utils">
+      <UniqueIdentifier>{126740b9-2fdc-4f40-a2b8-c13fc1c5908a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="libMFD\MFDSound++">
+      <UniqueIdentifier>{c969c0c2-cbac-4b07-ba77-c88a9a5ad9ca}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="MultipleVessels">
+      <UniqueIdentifier>{a04ffc4e-58ba-44b7-b2ba-68a0cd0e946a}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnjoLib">
+      <UniqueIdentifier>{3541d625-476b-4a96-ac9c-b87b834b2406}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnjoLib\Orbiter">
+      <UniqueIdentifier>{87b7b8f3-6bd7-44d5-b62f-1beb4c77c2cc}</UniqueIdentifier>
+    </Filter>
+    <Filter Include="EnjoLib\Util">
+      <UniqueIdentifier>{bd672d93-b716-4f42-b8df-fc694e9daad8}</UniqueIdentifier>
+    </Filter>
+  </ItemGroup>
+  <ItemGroup>
+    <ClCompile Include="..\libMFD\Utils\MFDButtonPage.cpp">
+      <Filter>libMFD\Utils</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libMFD\MFDSound++\Sound.cpp">
+      <Filter>libMFD\MFDSound++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libMFD\MFDSound++\SoundMap.cpp">
+      <Filter>libMFD\MFDSound++</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libMFD\multipleVesselsMFD\MFDData.cpp">
+      <Filter>MultipleVessels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libMFD\multipleVesselsMFD\PluginMultipleVessels.cpp">
+      <Filter>MultipleVessels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\libMFD\multipleVesselsMFD\SimulationTimeData.cpp">
+      <Filter>MultipleVessels</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Orbiter\AngularAcc.cpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Orbiter\AutopilotRotation.cpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Orbiter\BurnTime.cpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Orbiter\SpaceMathOrbiter.cpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Orbiter\SystemsConverterOrbiter.cpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Orbiter\VesselCapabilities.cpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Util\CharManipulations.cpp">
+      <Filter>EnjoLib\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="..\lib\Util\FileUtils.cpp">
+      <Filter>EnjoLib\Util</Filter>
+    </ClCompile>
+    <ClCompile Include="src\BurnTimeMFD.cpp" />
+    <ClCompile Include="src\Comms.cpp" />
+    <ClCompile Include="src\DataSourceBase.cpp" />
+    <ClCompile Include="src\DataSourceBaseSync.cpp" />
+    <ClCompile Include="src\DataSourceBaseSyncSimple.cpp" />
+    <ClCompile Include="src\DataSourceDummy.cpp" />
+    <ClCompile Include="src\DataSourceLagrange.cpp" />
+    <ClCompile Include="src\DataSourceTransX.cpp" />
+    <ClCompile Include="..\lib\PID\DerivatorDiscrete.cpp" />
+    <ClCompile Include="..\lib\Systems\Geo.cpp" />
+    <ClCompile Include="src\Graph.cpp" />
+    <ClCompile Include="src\InputBox.cpp" />
+    <ClCompile Include="..\lib\PID\IntegratorDiscrete.cpp" />
+    <ClCompile Include="src\MFDButtonPageBTC.cpp" />
+    <ClCompile Include="src\MFDDataBurnTime.cpp" />
+    <ClCompile Include="..\lib\PID\PID.cpp" />
+    <ClCompile Include="src\PluginBurnTime.cpp" />
+    <ClCompile Include="..\lib\Systems\Point.cpp" />
+    <ClCompile Include="src\SoundMapBTC.cpp" />
+    <ClCompile Include="src\SoundSampleIDEnum.cpp" />
+    <ClCompile Include="..\lib\Systems\Spherical.cpp" />
+    <ClCompile Include="..\lib\Systems\SystemsConverter.cpp" />
+    <ClCompile Include="..\lib\Systems\Vect3.cpp" />
+    <ClCompile Include="..\lib\Math\VectorMath.cpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ClInclude Include="..\libMFD\Utils\mfdbuttonpage.hpp">
+      <Filter>libMFD\Utils</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libMFD\MFDSound++\Sound.hpp">
+      <Filter>libMFD\MFDSound++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libMFD\MFDSound++\SoundMap.hpp">
+      <Filter>libMFD\MFDSound++</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libMFD\multipleVesselsMFD\MFDData.hpp">
+      <Filter>MultipleVessels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libMFD\multipleVesselsMFD\PluginMultipleVessels.hpp">
+      <Filter>MultipleVessels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\libMFD\multipleVesselsMFD\SimulationTimeData.hpp">
+      <Filter>MultipleVessels</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\Orbiter\AngularAcc.hpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\Orbiter\AutopilotRotation.hpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\Orbiter\BurnTime.hpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\Orbiter\SpaceMathOrbiter.hpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\Orbiter\SystemsConverterOrbiter.hpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\Orbiter\VesselCapabilities.hpp">
+      <Filter>EnjoLib\Orbiter</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\Util\CharManipulations.hpp">
+      <Filter>EnjoLib\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="..\lib\Util\FileUtils.hpp">
+      <Filter>EnjoLib\Util</Filter>
+    </ClInclude>
+    <ClInclude Include="src\afxres.h" />
+    <ClInclude Include="src\BurnTimeMFD.h" />
+    <ClInclude Include="src\Comms.h" />
+    <ClInclude Include="src\DataSourceBase.h" />
+    <ClInclude Include="src\DataSourceBaseSync.h" />
+    <ClInclude Include="src\DataSourceBaseSyncSimple.h" />
+    <ClInclude Include="src\DataSourceDummy.h" />
+    <ClInclude Include="src\DataSourceLagrange.h" />
+    <ClInclude Include="src\DataSourceTransX.h" />
+    <ClInclude Include="..\lib\PID\DerivatorDiscrete.hpp" />
+    <ClInclude Include="..\lib\Systems\Geo.hpp" />
+    <ClInclude Include="src\globals.h" />
+    <ClInclude Include="src\Graph.h" />
+    <ClInclude Include="src\InputBox.h" />
+    <ClInclude Include="..\lib\PID\IntegratorDiscrete.hpp" />
+    <ClInclude Include="src\MFDButtonPageBTC.h" />
+    <ClInclude Include="src\MFDDataBurnTime.h" />
+    <ClInclude Include="..\lib\PID\PID.hpp" />
+    <ClInclude Include="src\PluginBurnTime.h" />
+    <ClInclude Include="..\lib\Systems\Point.hpp" />
+    <ClInclude Include="src\resource.h" />
+    <ClInclude Include="src\SoundMapBTC.h" />
+    <ClInclude Include="src\SoundSampleIDEnum.hpp" />
+    <ClInclude Include="..\lib\Systems\Spherical.hpp" />
+    <ClInclude Include="..\lib\Systems\SystemsConverter.hpp" />
+    <ClInclude Include="..\lib\Systems\Vect3.hpp" />
+    <ClInclude Include="..\lib\Math\VectorMath.hpp" />
+  </ItemGroup>
+  <ItemGroup>
+    <ResourceCompile Include="src\BurnTimeCalcMFD.rc" />
+  </ItemGroup>
+</Project>
