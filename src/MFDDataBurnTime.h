@@ -17,7 +17,7 @@ public:
   void Update();
   void ArmAutoBurn();
   void CalcCircular();
-  void CalcRadDist();
+  void CalcDRadDPeri();
   void CalcPeriod();
   void CalcApses(VESSEL* vessel);
   void CalcIBurn(VESSEL* vessel);

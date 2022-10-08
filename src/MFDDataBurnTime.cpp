@@ -249,7 +249,7 @@ void MFDDataBurnTime::CalcCircular() {
   dv=fabs(Vcirc-Vapse);
 }
 
-void MFDDataBurnTime::CalcRadDist() {
+void MFDDataBurnTime::CalcDRadDPeri() {
     if (e > 1.0 - 1e-16)
     {
         if (dDist != 0.0) dDist = 0.0;
@@ -259,6 +259,8 @@ void MFDDataBurnTime::CalcRadDist() {
     double Vtrgt;
     double Vapse;
     double Atrgt;
+    double Ptrgt;
+    double Rtrgt;
     switch (mode) {
     case BURNMODE_PERI:
         Rapse = Rperi;
@@ -269,50 +271,40 @@ void MFDDataBurnTime::CalcRadDist() {
         IReference = IApo;
         break;
     case BURNMODE_MAN:
-        //Rapse = Rapo;
-        //IReference = IManual;
-        //break;
+        Rapse = Rapo;
+        IReference = IManual;
+        break;
     default:
         return;
     }
     Vapse = sqrt(mu * (2 / Rapse - 1 / a));
     if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
     {
-        Atrgt = a + (dDist == 0 ? 0 : dDist / 2);
+        if (inputmode == INPUTMODE_PERIOD)
+        {
+            Ptrgt = Period + dPeriod;
+            Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
+        }
+        else
+        {
+            Atrgt = - (Rapse + dDist) * mu / ((Rapse + dDist) * pow(Vapse, 2) - 2 * mu);
+            Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+        }
+        
         Vtrgt = sqrt(mu * (2 / Rapse - 1 / Atrgt));
-        dv = fabs(Vtrgt - Vapse);
+        Rtrgt = 2 * a * mu / (a * pow(Vtrgt, 2) + mu);
+        dv = round(fabs(Vtrgt - Vapse) * 1e7) / 1e7;
+        dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
     }
     else
     {
         Atrgt = - Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
-        dDist = round(fabs(Atrgt - a) * 2 * 1e4) / 1e4;
+        Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+        Rtrgt = 2 * a * mu / (a * pow(Vapse + dv, 2) + mu);
+        dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
+        dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
     }
 
-}
-
-void MFDDataBurnTime::CalcPeriod() {
-
-    if (e > 1.0 - 1e-16)
-    {
-        if(dPeriod != 0.0) dPeriod = 0.0;
-        return;
-    }
-    double Atrgt;
-    double Ptrgt = Period + dPeriod;
-    if (mode == BURNMODE_PERI || mode == BURNMODE_APO)
-    {
-        if (inputmode == INPUTMODE_PERIOD)
-        {
-            Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
-            dDist = round(fabs(Atrgt - a) * 2 * 1e4) / 1e4;
-        }
-        else
-        {
-            Atrgt = a + (dDist == 0 ? 0 : dDist / 2);
-            Ptrgt = 2 * PI * sqrt(pow(Atrgt,3) / mu);
-            dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
-        }
-    }
 }
 
 void MFDDataBurnTime::CalcIBurn(VESSEL* vessel)
@@ -361,8 +353,7 @@ void MFDDataBurnTime::CalcIBurn(VESSEL* vessel)
 //if (mdot!=0) TTot=(mv-me)/mdot;
   me = vessel->GetEmptyMass();
 
-  CalcPeriod();
-  CalcRadDist();
+  CalcDRadDPeri();
 
   if (mode==BURNMODE_TGT)
   {
