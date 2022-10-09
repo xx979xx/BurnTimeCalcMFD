@@ -313,20 +313,30 @@ void MFDDataBurnTime::CalcDRadDPeri() {
         {
             if (inputmode == INPUTMODE_PERIOD)
             {
-
+                Ptrgt = Period + dPeriod;
+                Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
+                //Rtrgt = 2 * Atrgt * mu / (Atrgt * pow(Vapse + dv, 2) + mu);
+                //dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
             }
             else
             {
-
+                return;
+                //Rtrgt = Rapse + dDist;
+                //Atrgt = -Rapse * mu / (Rapse * pow(Vapse, 2) - 2 * mu);
+                //Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+                //dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
             }
+            Vtrgt = sqrt(mu * (2 / Rapse - 1 / Atrgt));
+            dv = round(fabs(Vtrgt - Vapse) * 1e7) / 1e7;
+
         }
         else
         {
-            //Atrgt = -Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
-            //Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+            Atrgt = -Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
+            Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
             //Rtrgt = 2 * Atrgt * mu / (Atrgt * pow(Vapse + dv, 2) + mu);
             //dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
-            //dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+            dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
         }
     }
 
