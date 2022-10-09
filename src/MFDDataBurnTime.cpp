@@ -309,6 +309,9 @@ void MFDDataBurnTime::CalcDRadDPeri() {
     }
     else
     {
+	//	inline double TrueAnomaly (double ma) const           // ma: mean anomaly
+	//	inline double MeanAnomaly_from_TrueAnomaly (double ta) const
+
         if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
         {
             if (inputmode == INPUTMODE_PERIOD)
