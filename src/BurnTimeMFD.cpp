@@ -248,12 +248,12 @@ bool BurnTimeMFD::Update(oapi::Sketchpad * skp)
 	    PrintEngUnit(skp,"Extra Fuel Mass:       %7.3f","g","lbm", 1000,gTolb,m_data->mextra,5,line19);
 	}
 
-    if (m_data->mode == BURNMODE_PERI || m_data->mode == BURNMODE_APO || m_data->mode == BURNMODE_MAN)
+    if (m_data->mode == BURNMODE_PERI || m_data->mode == BURNMODE_APO)// || m_data->mode == BURNMODE_MAN)
     {
         skp->SetTextColor((m_data->inputmode == INPUTMODE_DISTANCE) ? YELLOW : GRAY);
-        PrintEngUnit(skp, "Target Altitude Change:%7.3f", "m", "ft", 1, mToft, m_data->dDist, 5, line2);
+        PrintEngUnit(skp, "Max Altitude Change:   %7.3f", "m", "ft", 1, mToft, m_data->dDist, 5, line2);
         skp->SetTextColor((m_data->inputmode == INPUTMODE_PERIOD) ? YELLOW : GRAY);
-        PrintEngUnit(skp, "Target Orbit-T Change: %7.3f", "s", m_data->dPeriod, 5, line9);
+        PrintEngUnit(skp, "Orbit Period Change:   %7.3f", "s", m_data->dPeriod, 5, line9);
     }
     
 

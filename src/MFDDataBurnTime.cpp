@@ -278,32 +278,58 @@ void MFDDataBurnTime::CalcDRadDPeri() {
         return;
     }
     Vapse = sqrt(mu * (2 / Rapse - 1 / a));
-    if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
+    if (mode == BURNMODE_PERI || BURNMODE_APO)
     {
-        if (inputmode == INPUTMODE_PERIOD)
+        if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
         {
-            Ptrgt = Period + dPeriod;
-            Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
+
+            if (inputmode == INPUTMODE_PERIOD)
+            {
+                Ptrgt = Period + dPeriod;
+                Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
+                dDist = round(fabs(Atrgt - a) * 2 * 1e4) / 1e4;
+            }
+            else
+            {
+                Atrgt = a + (dDist == 0 ? 0 : dDist / 2);
+                Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+                dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+            }
+
+            Vtrgt = sqrt(mu * (2 / Rapse - 1 / Atrgt));
+            dv = round(fabs(Vtrgt - Vapse) * 1e7) / 1e7;
         }
         else
         {
-            Atrgt = - (Rapse + dDist) * mu / ((Rapse + dDist) * pow(Vapse, 2) - 2 * mu);
+            Atrgt = -Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
             Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+            dDist = round(fabs(Atrgt - a) * 2 * 1e4) / 1e4;
+            dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
         }
-        
-        Vtrgt = sqrt(mu * (2 / Rapse - 1 / Atrgt));
-        Rtrgt = 2 * a * mu / (a * pow(Vtrgt, 2) + mu);
-        dv = round(fabs(Vtrgt - Vapse) * 1e7) / 1e7;
-        dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
     }
     else
     {
-        Atrgt = - Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
-        Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
-        Rtrgt = 2 * a * mu / (a * pow(Vapse + dv, 2) + mu);
-        dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
-        dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+        if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
+        {
+            if (inputmode == INPUTMODE_PERIOD)
+            {
+
+            }
+            else
+            {
+
+            }
+        }
+        else
+        {
+            //Atrgt = -Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
+            //Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+            //Rtrgt = 2 * Atrgt * mu / (Atrgt * pow(Vapse + dv, 2) + mu);
+            //dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
+            //dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+        }
     }
+
 
 }
 
