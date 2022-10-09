@@ -41,6 +41,7 @@ MFDDataBurnTime::MFDDataBurnTime(VESSEL * vessel)
     dDist = 0.0;
     Period = 0.0;
     dPeriod = 0.0;
+    ELEMENTS el;
 
     m_dataSources.push_back(new DataSourceTransX());
     m_dataSources.push_back(new DataSourceBaseSyncSimple());
@@ -194,7 +195,6 @@ double RocketEqnT(double dv, double m, double F, double isp) {
 
 
 void MFDDataBurnTime::CalcApses(VESSEL* vessel) {
-  ELEMENTS el;
   ORBITPARAM op;
   OBJHANDLE Ref = vessel->GetGravityRef();
   vessel->GetElements(Ref, el, &op);
@@ -255,12 +255,7 @@ void MFDDataBurnTime::CalcDRadDPeri() {
         if (dDist != 0.0) dDist = 0.0;
         return;
     }
-    double Rapse;
-    double Vtrgt;
-    double Vapse;
-    double Atrgt;
-    double Ptrgt;
-    double Rtrgt;
+    double Rapse, Vtrgt, Vapse, Atrgt, Ptrgt, Rtrgt;
     switch (mode) {
     case BURNMODE_PERI:
         Rapse = Rperi;
@@ -309,25 +304,25 @@ void MFDDataBurnTime::CalcDRadDPeri() {
     }
     else
     {
-	//	inline double TrueAnomaly (double ma) const           // ma: mean anomaly
-	//	inline double MeanAnomaly_from_TrueAnomaly (double ta) const
+        ma = (IReference + Period / 2) % Period / Period * 2 * PI;
+        ta = el.TrueAnomaly (ma);
+        Rtrgt = a * (1 - e * e) / (1 + e * cos(ta));
 
         if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
         {
-            if (inputmode == INPUTMODE_PERIOD)
+            if (inputmode == INPUTMODE_DISTANCE)
+            {
+                Rtrgt = Rtrgt + dDist;
+                //Atrgt = -Rtrgt * mu / (Rtrgt * pow(Vapse, 2) - 2 * mu);
+                //Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+                //dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+            }
+            else
             {
                 Ptrgt = Period + dPeriod;
                 Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
                 //Rtrgt = 2 * Atrgt * mu / (Atrgt * pow(Vapse + dv, 2) + mu);
                 //dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
-            }
-            else
-            {
-                return;
-                //Rtrgt = Rapse + dDist;
-                //Atrgt = -Rapse * mu / (Rapse * pow(Vapse, 2) - 2 * mu);
-                //Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
-                //dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
             }
             Vtrgt = sqrt(mu * (2 / Rapse - 1 / Atrgt));
             dv = round(fabs(Vtrgt - Vapse) * 1e7) / 1e7;
