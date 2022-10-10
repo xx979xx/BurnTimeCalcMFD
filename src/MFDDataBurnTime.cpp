@@ -255,25 +255,20 @@ void MFDDataBurnTime::CalcDRadDPeri() {
         return;
     }
     double Rapse, Vtrgt, Vapse, Atrgt, Ptrgt, Rtrgt, ma, ta;
-    switch (mode) {
-    case BURNMODE_PERI:
-        Rapse = Rperi;
-        IReference = IPeri;
-        break;
-    case BURNMODE_APO:
-        Rapse = Rapo;
-        IReference = IApo;
-        break;
-    case BURNMODE_MAN:
-        Rapse = Rapo;
-        IReference = IManual;
-        break;
-    default:
-        return;
-    }
-    Vapse = sqrt(mu * (2 / Rapse - 1 / a));
+
     if (mode == BURNMODE_PERI || BURNMODE_APO)
     {
+        if (mode == BURNMODE_PERI)
+        {
+            Rapse = Rperi;
+            IReference = IPeri;
+        }
+        else
+        {
+            Rapse = Rapo;
+            IReference = IApo;
+        }
+        Vapse = sqrt(mu * (2 / Rapse - 1 / a));
         if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
         {
 
@@ -303,12 +298,13 @@ void MFDDataBurnTime::CalcDRadDPeri() {
     }
     else
     {
-        ma = IReference / Period * 2 * PI;
+        ma = IManual / Period * 2 * PI;
         while (ma > Period * 2 * PI) ma -= Period * 2 * PI;
         ta = GetTrueAnomaly (ma);
         Rapse = a * (1 - e * e) / (1 + e * cos(ta));
         ta = ta > 2 * PI ? ta + 2 * PI : ta - 2 * PI;
         Rtrgt = a * (1 - e * e) / (1 + e * cos(ta));
+        Vapse = sqrt(mu * (2 / Rapse - 1 / a));
 
         if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
         {
