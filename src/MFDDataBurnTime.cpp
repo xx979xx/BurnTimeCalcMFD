@@ -41,7 +41,6 @@ MFDDataBurnTime::MFDDataBurnTime(VESSEL * vessel)
     dDist = 0.0;
     Period = 0.0;
     dPeriod = 0.0;
-    ELEMENTS el;
 
     m_dataSources.push_back(new DataSourceTransX());
     m_dataSources.push_back(new DataSourceBaseSyncSimple());
@@ -255,7 +254,7 @@ void MFDDataBurnTime::CalcDRadDPeri() {
         if (dDist != 0.0) dDist = 0.0;
         return;
     }
-    double Rapse, Vtrgt, Vapse, Atrgt, Ptrgt, Rtrgt;
+    double Rapse, Vtrgt, Vapse, Atrgt, Ptrgt, Rtrgt, ma, ta;
     switch (mode) {
     case BURNMODE_PERI:
         Rapse = Rperi;
@@ -304,8 +303,11 @@ void MFDDataBurnTime::CalcDRadDPeri() {
     }
     else
     {
-        ma = (IReference + Period / 2) % Period / Period * 2 * PI;
-        ta = el.TrueAnomaly (ma);
+        ma = IReference / Period * 2 * PI;
+        while (ma > Period * 2 * PI) ma -= Period * 2 * PI;
+        ta = GetTrueAnomaly (ma);
+        Rapse = a * (1 - e * e) / (1 + e * cos(ta));
+        ta = ta > 2 * PI ? ta + 2 * PI : ta - 2 * PI;
         Rtrgt = a * (1 - e * e) / (1 + e * cos(ta));
 
         if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
@@ -478,6 +480,25 @@ void MFDDataBurnTime::ArmAutopilot()
     {
         //autopilot.SetTargetVector(velVector);
     }
+}
+
+double MFDDataBurnTime::GetTrueAnomaly(double ma)           // only if (e<1) closed orbit: solve M = E - e sin E, ma: mean anomaly
+{
+    const int niter = 16;
+    const double tol = 1e-14;
+    double res, E;
+    int i;
+    E = (fabs(ma - prev_ma) < 1e-2 ? prev_ea : ma);
+    res = ma - E + e * sin(E);
+    if (fabs(res) > fabs(ma))
+        E = 0.0, res = ma;
+    for (i = 0; fabs(res) > tol && i < niter; i++) {
+        E += (max(-1.0, min(1.0, res / (1.0 - e * cos(E)))));
+        res = ma - E + e * sin(E);
+    }
+    prev_ma = ma;
+    prev_ea = E;
+    return 2.0 * atan(sqrt((1.0 + e) / (1.0 - e)) * tan(0.5 * E));
 }
 
 /*

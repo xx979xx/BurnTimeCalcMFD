@@ -26,6 +26,7 @@ public:
   void ReGetDataFromSource();
   double GetTimeToIgnition() const;
   void ArmAutopilot();
+  double GetTrueAnomaly(double ma);
 
   static const int numEngines;
   static const THGROUP_TYPE groups[6];
@@ -72,6 +73,8 @@ public:
   AutopilotRotation autopilot;
 
   double dDist, Period, dPeriod;
+  double prev_ma, prev_ea = 0.0;
+  ELEMENTS el;
 
     std::vector<DataSourceBase*> m_dataSources;
 
