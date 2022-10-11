@@ -73,7 +73,7 @@ public:
   AutopilotRotation autopilot;
 
   double dDist, Period, dPeriod;
-  double prev_ma, prev_ea = 0.0;
+  //double prev_ma, prev_ea = 0.0;
   ELEMENTS el;
 
     std::vector<DataSourceBase*> m_dataSources;

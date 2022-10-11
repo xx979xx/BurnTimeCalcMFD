@@ -254,7 +254,7 @@ void MFDDataBurnTime::CalcDRadDPeri() {
         if (dDist != 0.0) dDist = 0.0;
         return;
     }
-    double Rapse, Vtrgt, Vapse, Atrgt, Ptrgt, Rtrgt, ma, ta;
+    double Rapse, Vtrgt, Vapse, Atrgt, Ptrgt;
 
     if (mode == BURNMODE_PERI || BURNMODE_APO)
     {
@@ -298,42 +298,43 @@ void MFDDataBurnTime::CalcDRadDPeri() {
     }
     else
     {
-        ma = IManual / Period * 2 * PI;
-        while (ma > Period * 2 * PI) ma -= Period * 2 * PI;
-        ta = GetTrueAnomaly (ma);
-        Rapse = a * (1 - e * e) / (1 + e * cos(ta));
-        ta = ta > 2 * PI ? ta + 2 * PI : ta - 2 * PI;
-        Rtrgt = a * (1 - e * e) / (1 + e * cos(ta));
-        Vapse = sqrt(mu * (2 / Rapse - 1 / a));
+        //double Rtrgt, ma, ta;
+        //ma = IManual / Period * 2 * PI;
+        //while (ma > Period * 2 * PI) ma -= Period * 2 * PI;
+        //ta = GetTrueAnomaly (ma);
+        //Rapse = a * (1 - e * e) / (1 + e * cos(ta));
+        //ta = ta > 2 * PI ? ta + 2 * PI : ta - 2 * PI;
+        //Rtrgt = a * (1 - e * e) / (1 + e * cos(ta));
+        //Vapse = sqrt(mu * (2 / Rapse - 1 / a));
 
-        if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
-        {
-            if (inputmode == INPUTMODE_DISTANCE)
-            {
-                Rtrgt = Rtrgt + dDist;
-                //Atrgt = -Rtrgt * mu / (Rtrgt * pow(Vapse, 2) - 2 * mu);
-                //Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
-                //dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
-            }
-            else
-            {
-                Ptrgt = Period + dPeriod;
-                Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
-                //Rtrgt = 2 * Atrgt * mu / (Atrgt * pow(Vapse + dv, 2) + mu);
-                //dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
-            }
-            Vtrgt = sqrt(mu * (2 / Rapse - 1 / Atrgt));
-            dv = round(fabs(Vtrgt - Vapse) * 1e7) / 1e7;
+        //if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
+        //{
+        //    if (inputmode == INPUTMODE_DISTANCE)
+        //    {
+        //        Rtrgt = Rtrgt + dDist;
+        //        //Atrgt = -Rtrgt * mu / (Rtrgt * pow(Vapse, 2) - 2 * mu);
+        //        //Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+        //        //dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+        //    }
+        //    else
+        //    {
+        //        Ptrgt = Period + dPeriod;
+        //        Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
+        //        //Rtrgt = 2 * Atrgt * mu / (Atrgt * pow(Vapse + dv, 2) + mu);
+        //        //dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
+        //    }
+        //    Vtrgt = sqrt(mu * (2 / Rapse - 1 / Atrgt));
+        //    dv = round(fabs(Vtrgt - Vapse) * 1e7) / 1e7;
 
-        }
-        else
-        {
-            Atrgt = -Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
-            Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
-            //Rtrgt = 2 * Atrgt * mu / (Atrgt * pow(Vapse + dv, 2) + mu);
-            //dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
-            dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
-        }
+        //}
+        //else
+        //{
+        //    Atrgt = -Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
+        //    Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
+        //    //Rtrgt = 2 * Atrgt * mu / (Atrgt * pow(Vapse + dv, 2) + mu);
+        //    //dDist = round(fabs(Rtrgt - Rapse) * 1e4) / 1e4;
+        //    dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+        //}
     }
 
 
@@ -478,24 +479,24 @@ void MFDDataBurnTime::ArmAutopilot()
     }
 }
 
-double MFDDataBurnTime::GetTrueAnomaly(double ma)           // only if (e<1) closed orbit: solve M = E - e sin E, ma: mean anomaly
-{
-    const int niter = 16;
-    const double tol = 1e-14;
-    double res, E;
-    int i;
-    E = (fabs(ma - prev_ma) < 1e-2 ? prev_ea : ma);
-    res = ma - E + e * sin(E);
-    if (fabs(res) > fabs(ma))
-        E = 0.0, res = ma;
-    for (i = 0; fabs(res) > tol && i < niter; i++) {
-        E += (max(-1.0, min(1.0, res / (1.0 - e * cos(E)))));
-        res = ma - E + e * sin(E);
-    }
-    prev_ma = ma;
-    prev_ea = E;
-    return 2.0 * atan(sqrt((1.0 + e) / (1.0 - e)) * tan(0.5 * E));
-}
+//double MFDDataBurnTime::GetTrueAnomaly(double ma)           // only if (e<1) closed orbit: solve M = E - e sin E, ma: mean anomaly
+//{
+//    const int niter = 16;
+//    const double tol = 1e-14;
+//    double res, E;
+//    int i;
+//    E = (fabs(ma - prev_ma) < 1e-2 ? prev_ea : ma);
+//    res = ma - E + e * sin(E);
+//    if (fabs(res) > fabs(ma))
+//        E = 0.0, res = ma;
+//    for (i = 0; fabs(res) > tol && i < niter; i++) {
+//        E += (max(-1.0, min(1.0, res / (1.0 - e * cos(E)))));
+//        res = ma - E + e * sin(E);
+//    }
+//    prev_ma = ma;
+//    prev_ea = E;
+//    return 2.0 * atan(sqrt((1.0 + e) / (1.0 - e)) * tan(0.5 * E));
+//}
 
 /*
 double MFDDataBurnTime::GetStackMass(VESSEL* vessel) {
