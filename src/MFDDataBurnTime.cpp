@@ -280,7 +280,7 @@ void MFDDataBurnTime::CalcDRadDPeri() {
             }
             else
             {
-                Atrgt = a + (dDist == 0 ? 0 : dDist / 2);
+                Atrgt = a + dDist / 2;
                 Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
                 dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
             }
