@@ -1,0 +1,168 @@
+<?xml version="1.0" encoding="UTF-8" standalone="yes" ?>
+<CodeBlocks_project_file>
+	<FileVersion major="1" minor="6" />
+	<Project>
+		<Option title="BurnTimeCalcMFD" />
+		<Option pch_mode="2" />
+		<Option compiler="msvc8" />
+		<Build>
+			<Target title="Debug">
+				<Option output="../../../Orbiter/orbiterBETA/Modules/Plugin/BurnTimeMFD.dll" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Debug/" />
+				<Option type="3" />
+				<Option compiler="msvc10" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MDd" />
+					<Add option="/Zi" />
+					<Add option="/DBUILD_DLL" />
+					<Add option="/D_DEBUG" />
+					<Add directory="BurnTimeCalcMFD/src" />
+					<Add directory="lib/Orbiter" />
+				</Compiler>
+				<Linker>
+					<Add option="/DEBUG" />
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="user32" />
+				</Linker>
+				<ExtraCommands>
+					<Add after='mt.exe /nologo /manifest &quot;bin\Debug\BurnTimeCalcMFD.dll.manifest&quot; /outputresource:&quot;bin\Debug\BurnTimeCalcMFD.dll&quot;;2' />
+				</ExtraCommands>
+			</Target>
+			<Target title="Release2010">
+				<Option output="../../../Orbiter/orbiter100830/Modules/Plugin/BurnTimeMFD.dll" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release2010/" />
+				<Option type="3" />
+				<Option compiler="msvc8" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/Ot" />
+					<Add option="/O2" />
+					<Add option="/DBUILD_DLL" />
+					<Add option="/DNDEBUG" />
+					<Add option="/DFIRST_INSTANCE" />
+					<Add directory="../../../Orbiter/orbiter100830/Orbitersdk/include" />
+					<Add directory="BurnTimeCalcMFD/src" />
+					<Add directory="lib/Orbiter" />
+				</Compiler>
+				<Linker>
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="user32" />
+					<Add directory="../../../Orbiter/orbiter100830/Orbitersdk/lib" />
+				</Linker>
+			</Target>
+			<Target title="Release2010-MSVC2010">
+				<Option output="../../../Orbiter/orbiter100830/Modules/Plugin/BurnTimeMFD.dll" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/Release2010-MSVC2010/" />
+				<Option type="3" />
+				<Option compiler="msvc10" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/Ot" />
+					<Add option="/O2" />
+					<Add option="/DBUILD_DLL" />
+					<Add option="/DNDEBUG" />
+					<Add option="/DFIRST_INSTANCE" />
+					<Add directory="../../../Orbiter/orbiter100830/Orbitersdk/include" />
+					<Add directory="BurnTimeCalcMFD/src" />
+					<Add directory="lib/Orbiter" />
+				</Compiler>
+				<Linker>
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="user32" />
+					<Add directory="../../../Orbiter/orbiter100830/Orbitersdk/lib" />
+				</Linker>
+			</Target>
+			<Target title="ReleaseBETA">
+				<Option output="../../../Orbiter/orbiterBETA/Modules/Plugin/BurnTimeMFD.dll" prefix_auto="0" extension_auto="0" />
+				<Option object_output="obj/ReleaseBETA/" />
+				<Option type="3" />
+				<Option compiler="msvc8" />
+				<Option createDefFile="1" />
+				<Option createStaticLib="1" />
+				<Compiler>
+					<Add option="/MD" />
+					<Add option="/Ot" />
+					<Add option="/O2" />
+					<Add option="/DBUILD_DLL" />
+					<Add option="/DNDEBUG" />
+					<Add option="/DORB2009" />
+					<Add option="/DLANG_EN" />
+					<Add directory="../../../Orbiter/orbiterBETA/Orbitersdk/include" />
+					<Add directory="../../../Orbiter/orbiter100830/Sound/OrbiterSound_SDK/MFDSOUND_SDK/MFDSound_Example" />
+					<Add directory="BurnTimeCalcMFD/src" />
+					<Add directory="lib/Orbiter" />
+				</Compiler>
+				<Linker>
+					<Add option="/INCREMENTAL:NO" />
+					<Add library="user32" />
+					<Add directory="../../../Orbiter/orbiterBETA/Orbitersdk/lib" />
+					<Add directory="../../../Orbiter/orbiter100830/Sound/OrbiterSound_SDK/MFDSOUND_SDK/MFDSound_Example" />
+				</Linker>
+			</Target>
+		</Build>
+		<Compiler>
+			<Add option="/TP" />
+			<Add option="/EHc" />
+			<Add option="/EHs" />
+			<Add option="/GR" />
+			<Add option="/Gy" />
+			<Add option="/GF" />
+			<Add option="/W3" />
+			<Add option="/EHsc" />
+			<Add directory="../lib" />
+			<Add directory="../libMFD" />
+			<Add directory="../KOST_Orbiter" />
+			<Add directory="../libWin" />
+			<Add directory="../" />
+		</Compiler>
+		<Linker>
+			<Add option="/NODEFAULTLIB:LIBCMT" />
+			<Add library="orbiter.lib" />
+			<Add library="orbitersdk.lib" />
+			<Add library="kernel32.lib" />
+			<Add library="user32.lib" />
+			<Add library="gdi32.lib" />
+			<Add library="ModuleMessagingExt.lib" />
+		</Linker>
+		<Unit filename="../libMFD/Utils/MFDButtonPage.cpp" />
+		<Unit filename="../libMFD/Utils/mfdbuttonpage.hpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/MFDData.cpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/MFDData.hpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/PluginMultipleVessels.cpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/PluginMultipleVessels.hpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/SimulationTimeData.cpp" />
+		<Unit filename="../libMFD/multipleVesselsMFD/SimulationTimeData.hpp" />
+		<Unit filename="../lib/Orbiter/BurnTime.cpp" />
+		<Unit filename="../lib/Orbiter/BurnTime.hpp" />
+		<Unit filename="src/BurnTimeMFD.cpp" />
+		<Unit filename="src/BurnTimeMFD.h" />
+		<Unit filename="src/MFDButtonPageBTC.cpp" />
+		<Unit filename="src/MFDButtonPageBTC.h" />
+		<Unit filename="src/MFDDataBurnTime.cpp" />
+		<Unit filename="src/MFDDataBurnTime.h" />
+		<Unit filename="src/PluginBurnTime.cpp" />
+		<Unit filename="src/PluginBurnTime.h" />
+		<Unit filename="src/globals.h" />
+		<Extensions>
+			<code_completion />
+			<envvars />
+			<debugger />
+			<lib_finder disable_auto="1" />
+			<DoxyBlocks>
+				<comment_style block="0" line="0" />
+				<doxyfile_project />
+				<doxyfile_build />
+				<doxyfile_warnings />
+				<doxyfile_output />
+				<doxyfile_dot />
+				<general />
+			</DoxyBlocks>
+		</Extensions>
+	</Project>
+</CodeBlocks_project_file>

@@ -1,0 +1,222 @@
+BTC: BurnTimeCalcMFD v1.1 (C) 2004 by David Henderson -- orbiter@aibs.org.uk
+     BurnTimeCalcMFD v1.2 (C) 2005 by Chris Jeppesen -- chrisj@kwansystems.org
+     BurnTimeCalcMFD v1.3 (C) 2006 by Chris Jeppesen -- chrisj@kwansystems.org
+     BurnTimeCalcMFD v1.4x(C) 2007 by Thomas Hagemeyer -- thomas.hg@web.de
+     BurnTimeCalcMFD v1.5 (C) 2007 by kwan3217         -- ??
+     BurnTimeCalcMFD v2.0 (C) 2007 by Thomas Hagemeyer -- thomas.hg@web.de
+     BurnTimeCalcMFD v2.4 (C) 2013 by Dimitris Gatsoulis (dgatsoulis)
+     BurnTimeCalcMFD v2.5 (C) 2014 by Szymon Ender (Enjo) -- www.enderspace.de
+     BurnTimeCalcMFD v2.6 (C) 2014 by Szymon Ender (Enjo) -- www.enderspace.de
+     BurnTimeCalcMFD v2.7 (C) 2014 by Szymon Ender (Enjo) -- www.enderspace.de
+     BurnTimeCalcMFD v2.8 (C) 2016 by Andrew Stokes (ADSWNJ) -- andrew.d.stokes@gmail.com
+     BurnTimeCalcMFD v2.9 (C) 2016 by Andrew Stokes (ADSWNJ) -- andrew.d.stokes@gmail.com
+
+BurnTimeCalcMFD (BTC) is a companion for TransX or any other transfer MFD that
+gives you your required dV for transfer orbit insertion, and time to periapsis
+(PeT) but not time to start burning.
+
+Using a simple first-order approximation of the mass decrease of your vessel
+BurnTimeCalcMFD calculates the time required to achieve the specified dV (you
+may read this off TransX's insertion display and enter it using the keys below).
+
+It also calulates the time required to produce half this velocty change to give
+you an approximate time to periapsis (PeT) to start your prograde (or retro-)
+burn.
+
+I've found it reliably gets me into a transfer with less than 1 degree offset
+between semi major axes using DeltaGlider and Fregat. Obviously it's only an
+approximation, however.
+
+
+LIMITATIONS
+===========
+
+BTC assumes you will be using 100% throttle for the burn.
+
+BTC cannot take MULTISTAGE burns into account. That is, you cannot change your
+empty weight during the burn.
+
+INSTALLATION
+============
+
+Unpack in your Orbiter folder, using folder names. Using the Modules tab
+in the Launchpad, activate BurnTimeMFD.
+
+You also need ModuleMessaging library, available under:
+http://www.orbithangar.com/searchid.php?ID=6412
+
+INSTRUCTIONS
+============
+
+The timer in BTC runs in three different modes: Periapse, Apoapse, and Manual.
+Naturally, in a hyperbolic orbit with no apoapse, Apoapse mode will be disabled.
+To switch between modes, use SHIFT_M. The current mode is highlighted in 
+yellow. When manual is both the active mode and the current variable, it
+is bright yellow. When it is only the active mode, it is dim yellow. When
+it is only the current variable, it is white, and when it is neither, it
+is gray.
+
+Bring up TransX with the Escape Plan properly configured. You will
+be given a required dV (delta-velocity) and PeT (time to pereiapsis). Bring
+up BTC.
+
+Use SHIFT_G (or GET button) to capture the values from either TransX or BaseSync.
+From TransX, you get the maneuver data, and from BaseSync you either get the Plane
+Change data or the Deorbit data, accoring to which screen you are in on BaseSync.
+If neither source is available, then nothing happens. If both sources are available,
+then the user is prompted to enter 1 for TransX or 2 for BaseSync. If the time is
+zero or negative, or the dV is zero, then the data is ignored. If the countrown is
+disarmed (i.e. the countdown stops), then it reverts to a manual burn until you
+re-get the data (as obviously the time would not reflect the right burn otherwise).
+
+If you want to do an Autoburn, use SHIFT_PERIOD to switch variables. Set the 
+manual delay to something less than the current PeT shown in TransX. When
+the PeT shown in TransX exactly matches the manual delay, press SHIFT_A. This 
+arms the Autoburn. The green timing calculations are replaced by a yellow
+countdown timer. Notice that this countdown is less than the specified PeT
+and manual delay, as it takes into account the "Engage at T-minus" calculation.
+
+Once the Autoburn is armed, no changes are possible to the dV magnitude or 
+manual timing. To abort an Autoburn before the yellow countdown reaches zero, 
+just push SHIFT_A again. This will cancel the burn. You may then freely 
+re-adjust the burn parameters.
+
+You will now need to turn PROGRADE (for an eject -- RETRO for a capture).
+BTC never takes control of the vessel attitude. You remain steerable before,
+during, and after the burn.
+
+If you want to manually burn, start your burn at the PeT time indicated by BTC.
+
+If you do an Autoburn, the burn will automatically start when the yellow 
+countdown reaches zero. The yellow countdown will then be replaced by a red
+countdown to engine shutdown. To abort the burn after it starts, press SHIFT_A.
+
+For a manual burn, kill the engines when dV = 0 ON THE TRANSX DISPLAY. An
+Autoburn should cut them automatically, and very accurately.
+
+You should only me a small angle off the correct orbit. You may correct this
+by thrusting 90 degrees inwards or or outwards briefly. Do this soon after
+completing your burn, it saves fuel this way.
+
+Finally adjust your dV and SemiMajor offset values down to as close to zero
+as pratical with the LINEAR RCS mode.
+
+AUTOCIRC
+========
+
+The new Autocirc feature makes certain maneuvers like lunar orbit insertion,
+OMS-2, and geostationary orbit insertion, easy. It calculates the necessary
+DeltaV and timing to circularize the orbit at one of the apsides. To use 
+Autocirc, first select the correct apse with SHIFT_M. Then, push SHIFT_C.
+That's all there is to it! 
+
+Just make sure to have the craft in the correct orientation, 
+prograde or retrograde, when the burn starts. You want to use prograde at 
+apoapse, and retrograde at periapse.
+
+The Autocirc feature continually recalculates the timing based on the 
+current vessel state vector, to account for perturbations due to 
+third-body effects or non-spherical gravity.
+
+UNITS
+=====
+
+The Burn time calculator can now be made to work in either SI units (kg,N,s,m)
+or in US units (lbm,lbf,s,ft). Some historical ships like the Space Shuttle
+or older US ships work natively in US units, so this allows inter-operation with
+that kind of ship to flow more easily. 
+
+To switch units, push the UNT button.
+
+Good luck!
+
+David "dh219/Hendo" Henderson.
+orbiter@aibs.org.uk
+http://www.aibs.org.uk/orbiter/
+
+Chris Jeppesen
+chrisj@kwansystems.org
+
+Thomas Hagemeyer
+topperte301@arcor.de
+KEYSTROKES
+==========
+
+All keystrokes require SHIFT.
+
+- (or _): decrease dV or manual time by adjustment factor
+= (or +): increase dv or manual time by adjustment factor
+
+[ (or {): Multiply adjustment factor by 10
+] (or }): Divide adjustment factor by 10
+
+, (or <): Switch from dV to manual time and back
+. (or >): Switch from dV to manual time and back
+
+BACKSPACE: reset to zero
+
+M: Change timing mode to next mode
+
+A: Arm the Autoburn timer with the current dV and timing mode
+   or cancel a previous Autoburn.
+
+C: Calculate a circularization maneuver at the currently selected
+   apse (switch with M, action when used on manual burn time is undefined).
+   and arm the Autocirc timer with the correct dV and timing mode.
+
+L: Fire the engines for the full time calculated, starting
+   right now.
+
+E: Select Engine: Main, Hover or Retro
+
+U: Switch units: SI or US
+
+(new from 2.5)
+G: Get values from TransX' Escape Plan or Manoeuvre Mode
+
+==============
+v1.1 COPYRIGHT
+==============
+
+BurnTimeCalc, the code, modules and configurations are copyright 2004
+David Henderson and released under the terms of the GNU LGPL (see
+enclosed LGPL.TXT) with the exception of the MaverickTech thruters
+libraries Titled Mav*.h Mav*.cpp which are copyright 2003 Russell
+Smith and may not be used or distributed without due credit to R Smith
+and without enclosing the full source.
+
+==============
+v1.2, v1.3 COPYRIGHT
+==============
+
+Version 1.2, the code, modules and configurations are copyright 2005
+Chris Jeppesen and continue to be under the terms of the GNU LGPL (see
+enclosed LGPL.TXT). All MaverickTech code has been removed.
+
+Version 1.3, the code, modules and configurations are copyright 2006
+Chris Jeppesen and continue to be under the terms of the GNU LGPL (see
+enclosed LGPL.TXT).
+
+==============
+v1.4, v1.41 COPYRIGHT
+==============
+
+Version 1.4, the code, modules and configurations are copyright 2007
+Thomas Hagemeyer and continue to be under the terms of the GNU LGPL (see
+enclosed LGPL.TXT).
+
+==============
+v1.5 COPYRIGHT
+==============
+
+Version 1.5, the code, modules and configurations are copyright 2008
+Chris Jeppesen and continue to be under the terms of the GNU LGPL (see
+enclosed LGPL.TXT).
+
+==============
+v2.x COPYRIGHT
+==============
+
+Version 2.x (all version 2 version), the code, modules and configurations
+are copyright 2007-2016 by the authors above, and continue to be under the
+terms of the GNU LGPL (see enclosed LGPL.TXT).

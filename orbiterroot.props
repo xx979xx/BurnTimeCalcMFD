@@ -1,0 +1,31 @@
+<?xml version="1.0" encoding="utf-8"?>
+<Project DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <ImportGroup Label="PropertySheets">
+  </ImportGroup>
+  <PropertyGroup Label="UserMacros">
+    <OrbiterDir2016>..\..\..\orbiter\orbiter2016\</OrbiterDir2016>
+    <OrbiterDir2010>..\..\..\orbiter\orbiter100830\</OrbiterDir2010>
+    <OrbiterDir2006>..\..\..\orbiter\orbiter060929\</OrbiterDir2006>
+    <OrbiterDirBETA>..\..\..\orbiter\orbiterBETA\</OrbiterDirBETA>
+  </PropertyGroup>
+  <PropertyGroup>
+    <_ProjectFileVersion>17.0.32819.101</_ProjectFileVersion>
+  </PropertyGroup>
+  <ItemDefinitionGroup />
+  <ItemGroup>
+    <BuildMacro Include="OrbiterDir2016">
+      <Value>$(OrbiterDir2016)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="OrbiterDir2010">
+      <Value>$(OrbiterDir2010)</Value>
+      <EnvironmentVariable>true</EnvironmentVariable>
+    </BuildMacro>
+    <BuildMacro Include="OrbiterDir2006">
+      <Value>$(OrbiterDir2006)</Value>
+    </BuildMacro>
+    <BuildMacro Include="OrbiterDirBETA">
+      <Value>$(OrbiterDirBETA)</Value>
+    </BuildMacro>
+  </ItemGroup>
+</Project>

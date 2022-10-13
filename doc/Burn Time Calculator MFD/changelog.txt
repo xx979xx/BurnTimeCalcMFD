@@ -1,0 +1,138 @@
+BTC: BurnTimeCalcMFD v1.1 (C) 2004 by David Henderson -- orbiter@aibs.org.uk
+     BurnTimeCalcMFD v1.2 (C) 2005 by Chris Jeppesen -- chrisj@kwansystems.org
+     BurnTimeCalcMFD v1.3 (C) 2006 by Chris Jeppesen -- chrisj@kwansystems.org
+     BurnTimeCalcMFD v1.4x(C) 2007 by Thomas Hagemeyer -- thomas.hg@web.de
+     BurnTimeCalcMFD v1.5 (C) 2007 by kwan3217         -- ??
+     BurnTimeCalcMFD v2.0 (C) 2007 by Thomas Hagemeyer -- thomas.hg@web.de
+     BurnTimeCalcMFD v2.4 (C) 2013 by Dimitris Gatsoulis (dgatsoulis)
+     BurnTimeCalcMFD v2.5 (C) 2014 by Szymon Ender (Enjo) -- www.enderspace.de
+     BurnTimeCalcMFD v2.6 (C) 2014 by Szymon Ender (Enjo) -- www.enderspace.de
+     BurnTimeCalcMFD v2.7 (C) 2014 by Szymon Ender (Enjo) -- www.enderspace.de
+     BurnTimeCalcMFD v2.8 (C) 2016 by Andrew Stokes (ADSWNJ) -- andrew.d.stokes@gmail.com
+     BurnTimeCalcMFD v2.9 (C) 2016 by Andrew Stokes (ADSWNJ) -- andrew.d.stokes@gmail.com
+     BurnTimeCalcMFD v2.9.2 (C) 2016 by Szymon Ender (Enjo) -- www.enderspace.de
+     BurnTimeCalcMFD v3.0 (C) 2018 by Szymon Ender (Enjo) -- www.enderspace.de
+     BurnTimeCalcMFD v3.1 (C) 2018 by Szymon Ender (Enjo) -- www.enderspace.de
+
+
+CHANGES IN v3.1
+===============
+* Liberated from BaseSynchExports.h. Now compiles as a self-contained project
+* Runtime library is now linked statically
+* Added a sound played upon arming the MFD
+
+CHANGES IN v3.0
+===============
+* Liberated from a direct linkage against ModuleMessagingExt. Now using dynamic linkage via LoadLibraryA
+* Created resource files, thus moving the MFD away from Misc to MFD modes in Orbiter Launchpad
+* Created polymorfic communication and display classes for easier further extension
+
+CHANGES IN v2.9.2
+===============
+* Removed the legacy ModuleMessaging dependency and replaced with ModuleMessagingExt only
+
+CHANGES IN v2.9.1
+===============
+* Fixed retro-burn GET problem thanks Boogabooga for reporting this)
+
+CHANGES IN v2.9
+===============
+* Fixed text overwrite issue when in Target Mode and using invalid engine (i.e. doors closed or no propellant)
+* Fixed bug when using invalid engine and docked (burns instantly complete, instead of stating invalid engine)	 
+
+CHANGES IN v2.8
+===============
+* Interconnected BurnTimeCalc with BaseSync MFD for plane change and retro burns. GET button now auto-selects
+    TransX or BaseSync if either is running, or prompts user if both are running.
+* Miscellaneous display mods (removed space between number and symbol when the scale unit is x1,
+     put the Selected Engine Not Available in red, with advice to check doors and fuel, consistent 
+     capitalization and decimal point alignment, etc.)
+* Replaced periapse and apoapse text with periapsis and apoapsis.
+* Put version number on MFD title, similar to BaseSyncMFD.
+* Updated the LGPL license text to version 3 in sourcecode and lgpl.txt
+
+	 
+CHANGES IN v2.7
+===============
+* Resolved sporadic freeze on startup due to displaying of uninitialized variables
+* Resolved craft's "orbit freeze" bug when the MFD was closed and Time Acc. >= 10000 was applied
+* Added new button - RCS for including RCS fuel in total DV calculations
+* Internal: Changed "TBurn" ModuleMessaging variable to "InstantaneousBurnTime". TransX update required for GET button to operate correctly
+
+CHANGES IN v2.6
+===============
+* Resolved CTDs when switching the MFD on and off
+* Simultaneous multiple vessels support (can be pre-programmed!) thanks to MultipleVesselsMFD
+* Added RCS Forward, Up, and Retro "engine types"
+
+CHANGES IN v2.5
+===============
+* Communicating directly with TransX via ModuleMessaging library. Use SHIFT_G or GET button, when TransX displays DV and time.
+* Added another, extensible button page thanks to MFDButtonPage.
+
+CHANGES IN v2.4
+===============
+* EXT button, where you enter the extra fuel mass you are carrying in kg. It may be RCS or an External fuel tank or even the total. 
+* Slightly different colors for improved visuals.
+
+CHANGES IN v2.0
+===============
+* New interface for inputting vars (via inputbox)
+* Burn can be start related to the distance to a target object
+* New autoburnmode "burn by target distance" added
+
+CHANGES IN v1.5
+===============
+* Some code cleanup
+* Bug where engine group existed but was not connected to a propellant 
+  resource - FIXED
+* Works in SI or feet (for use with Space Shuttle)
+
+CHANGES IN v1.42
+===============
+* Vars will be stored by chanching View or MFD. Use "Reset" to restart
+* New Var: Rel. DeltaS distance will be indicate the relativ needed distance 
+  to get DV to Zero (Relativ to an object where DeltaV == MFD-entered DeltaV)
+
+CHANGES IN v1.41
+===============
+* CTD-Crash-Bug fixed when engine is not available at some spaceship-Add-Ons
+* MFD is now displaying if the enigine is available or not
+
+CHANGES IN v1.4
+===============
+* You can select the Engine you want to use: Main, hover or retro.
+
+CHANGES IN v1.3
+===============
+* Compiled to work with Orbiter 060504 (only!)
+* Auto Circularization (Autocirc) - Automatically calculate the timing and
+  magnitude of the burn to circularize the orbit at either periapse or 
+  apoapse.
+* Compensation for non-unity propellant resource efficiency (necessary for
+  precision maneuvers in the DeltaGlider-III)
+* Accounts for entire docked stack mass when calculating burn timing. Note
+  that this does not mean it will compensate for off-axis thrust or anything
+  like that, so moving ISS will still take effort with thrust vectoring.
+* During a burn, amount of DeltaV to go is displayed, in a continuous 
+  countdown manner
+* Manual burn time now counts down while waiting for burn start
+* Timing for a burn at an apse (and magnitude for an Autocirc) is now 
+  continually recalculated. This should help when using non-spherical gravity.
+* Documentation fix! Timing modes and SHIFT_M are documented. Sorry about that.
+
+CHANGES IN v1.2
+===============
+Many and numerous. 
+
+* Compiled to work with Orbiter 050216
+* Removed usage of MaverickTech's clever hacks, since the Orbiter API now 
+  directly supports what MavTech.cpp was needed for
+* Added Autoburn - The MFD can now automatically execute the burn. You can
+  program it to execute the burn at periapse, apoapse, or some settable
+  time in the future. It executes the burn such that half the dV is before
+  the time mark, and half is after.
+* Another variable is added, the manual delay timing. Variables are now 
+  adjusted in a manner more similar to TransX, with the -+ pair changing
+  the variable, [] changing the coarseness of the -+ change, and <> 
+  switching variables.
