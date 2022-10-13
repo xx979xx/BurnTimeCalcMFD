@@ -35,12 +35,14 @@ MFDButtonPageBTC::MFDButtonPageBTC()
 
 // {"DV","DT","OS","ST","RST", "MD", "ARM","BRN", "CIR","UNT","ENG","EXT"};
     static const MFDBUTTONMENU mnu2[] = {
-        {"Switch buttons page", 0, 'B'},
+        {"Switch buttons page", 0, 'P'},
         {"Set Target for", "distance calculation", 'S'},
         {"Enter offset distance", "to target", 'O'},
         {"Switch SI / US", "unit system", 'U'},
-        {"Enable rot. AP", "", 'A'},
-        {"Disable rot. AP", "", 'D'}
+        //{"Enable rot. AP", "", 'A'},
+        //{"Disable rot. AP", "", 'D'}
+        {"Enter distance change", "to orbit altitude", 'D'},
+        {"Enter time change to", "orbit period", 'L'}
     };
     RegisterPage(mnu2, sizeof(mnu2) / sizeof(MFDBUTTONMENU));
 
@@ -50,7 +52,8 @@ MFDButtonPageBTC::MFDButtonPageBTC()
     RegisterFunction("UNT", OAPI_KEY_U, &BurnTimeMFD::HandlerSwitchSI_US);
     //RegisterFunction("AP",  OAPI_KEY_A, &BurnTimeMFD::HandlerAutopilot);
     //RegisterFunction("DAP", OAPI_KEY_D, &BurnTimeMFD::HandlerAutopilotDisable);
-
+    RegisterFunction("DRD", OAPI_KEY_D, &BurnTimeMFD::HandlerDRadialDistance);
+    RegisterFunction("DOP", OAPI_KEY_L, &BurnTimeMFD::HandlerDOrbitPeriod);
 }
 
 MFDButtonPageBTC::~MFDButtonPageBTC()
@@ -60,4 +63,3 @@ bool MFDButtonPageBTC::SearchForKeysInOtherPages() const
 {
     return true;
 }
-

@@ -29,7 +29,7 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 	std::string InputUnits =  "yzafpnum_kMGTPEZY;";
 	std::string RightChar = std::string(SearchString.substr(SearchString.length()-1,SearchString.length()));
 	std::string numbers = "0123456789;";
-	//Überprüfe ob der String eine Zahl ist... (check if the string is a number)
+	//ÃœberprÃ¼fe ob der String eine Zahl ist... (check if the string is a number)
 
 
 	if (data->inputmode != INPUTMODE_TARGET )
@@ -48,8 +48,11 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 				SearchString.substr(laufNumber,1) != "6" &&
 				SearchString.substr(laufNumber,1) != "7" &&
 				SearchString.substr(laufNumber,1) != "8" &&
-				SearchString.substr(laufNumber,1) != "9"
-
+				SearchString.substr(laufNumber,1) != "9" &&
+				(
+					SearchString.substr(laufNumber, 1) != "-" || laufNumber != 0 || data->inputmode != INPUTMODE_DV &&
+                    data->inputmode != INPUTMODE_DISTANCE && data->inputmode != INPUTMODE_PERIOD
+				)
 			) return false;
 		}
 		double MyExp=-24;
@@ -73,6 +76,13 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 			{
 				data->dv = atof(SearchString.c_str());
 				if (data->dspunit == 1) data->dv = data->dv * 0.3048;
+				if (data->dv < 0) {
+					data->dv = fabs(data->dv);
+					data->retroBurn = true;
+				}
+				else {
+					data->retroBurn = false;
+				}
 			}
 			else if (data->inputmode==INPUTMODE_EXTRA )
 			{
@@ -80,10 +90,18 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 				if (data->dspunit == 1) data->mextra = data->mextra * 0.45359237;
 			}
 			else if (data->inputmode==INPUTMODE_TIME )
-      {
-        data->EReference = oapiGetSimTime()+atof(SearchString.c_str());
-        data->IManual = atof(SearchString.c_str());
-      }
+			{
+				data->EReference = oapiGetSimTime()+atof(SearchString.c_str());
+				data->IManual = atof(SearchString.c_str());
+			}
+			else if (data->inputmode == INPUTMODE_DISTANCE)
+			{
+				data->dDist = atof(SearchString.c_str());
+			}
+			else if (data->inputmode == INPUTMODE_PERIOD)
+			{
+				data->dPeriod = atof(SearchString.c_str());
+			}
 		}
 		else
 		{
@@ -101,11 +119,32 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 			{
 				data->dv = atof(SearchString.c_str()) * pow(10,MyExp);
 				if (data->dspunit == 1) data->dv = data->dv * 0.3048;
+				if (data->dv < 0) {
+					data->dv = fabs(data->dv);
+					data->retroBurn = true;
+				}
+				else {
+					data->retroBurn = false;
+				}
+			}
+			else if (data->inputmode == INPUTMODE_DISTANCE)
+			{
+				data->dDist = atof(SearchString.c_str()) * pow(10, MyExp);
+			}
+			else if (data->inputmode == INPUTMODE_PERIOD)
+			{
+				data->dPeriod = atof(SearchString.c_str()) * pow(10, MyExp);
 			}
 			else data->IManual = atof(SearchString.c_str()) * pow(10,MyExp);
 			//sprintf(oapiDebugString(),"v1:%f  v2:%f ",atof(SearchString.c_str()),pow(10,MyExp));
 		}
-		data->inputmode=INPUTMODE_NONE;
+		if (data->inputmode == INPUTMODE_DISTANCE || data->inputmode == INPUTMODE_PERIOD)
+		{
+		}
+		else
+		{
+			data->inputmode = INPUTMODE_NONE;
+		}
 		return true;
 	}
 	else

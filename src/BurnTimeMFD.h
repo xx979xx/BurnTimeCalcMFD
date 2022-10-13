@@ -46,6 +46,8 @@ public:
   void HandlerGetFromOtherMFD();
   //void HandlerAutopilot();
   //void HandlerAutopilotDisable();
+  void HandlerDRadialDistance();
+  void HandlerDOrbitPeriod();
 
 protected:
   VESSEL *messel;
@@ -54,7 +56,7 @@ protected:
 private:
   //static int Sel_eng;
 	void writemenu(oapi::Sketchpad * skp);
-  int line( int );
+	int line( int );
   Graph m_graph;
 
   SoundMapBTC m_soundMap;

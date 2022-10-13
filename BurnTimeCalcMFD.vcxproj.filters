@@ -2,25 +2,25 @@
 <Project ToolsVersion="4.0" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
   <ItemGroup>
     <Filter Include="libMFD">
-      <UniqueIdentifier>{610c6c6b-5247-4b6b-9c4b-3979593d9bb9}</UniqueIdentifier>
+      <UniqueIdentifier>{f9387b73-e974-41e2-846d-34518bfdf766}</UniqueIdentifier>
     </Filter>
     <Filter Include="libMFD\Utils">
-      <UniqueIdentifier>{e9fc33de-67fc-43ca-a030-ff5eeb74834a}</UniqueIdentifier>
+      <UniqueIdentifier>{126740b9-2fdc-4f40-a2b8-c13fc1c5908a}</UniqueIdentifier>
     </Filter>
     <Filter Include="libMFD\MFDSound++">
-      <UniqueIdentifier>{feb94525-6fe5-432e-b2a2-f1cf1276b0cb}</UniqueIdentifier>
+      <UniqueIdentifier>{c969c0c2-cbac-4b07-ba77-c88a9a5ad9ca}</UniqueIdentifier>
     </Filter>
     <Filter Include="MultipleVessels">
-      <UniqueIdentifier>{95e22ed8-3021-4d0c-a68f-71f6b35a4553}</UniqueIdentifier>
+      <UniqueIdentifier>{a04ffc4e-58ba-44b7-b2ba-68a0cd0e946a}</UniqueIdentifier>
     </Filter>
     <Filter Include="EnjoLib">
-      <UniqueIdentifier>{6f46e188-4a7b-417e-9220-6759f214837e}</UniqueIdentifier>
+      <UniqueIdentifier>{3541d625-476b-4a96-ac9c-b87b834b2406}</UniqueIdentifier>
     </Filter>
     <Filter Include="EnjoLib\Orbiter">
-      <UniqueIdentifier>{eb326125-f7e6-46de-9d5a-3e2eeb04ac41}</UniqueIdentifier>
+      <UniqueIdentifier>{87b7b8f3-6bd7-44d5-b62f-1beb4c77c2cc}</UniqueIdentifier>
     </Filter>
     <Filter Include="EnjoLib\Util">
-      <UniqueIdentifier>{a3151968-b577-49e3-ae82-8419a76033f1}</UniqueIdentifier>
+      <UniqueIdentifier>{bd672d93-b716-4f42-b8df-fc694e9daad8}</UniqueIdentifier>
     </Filter>
   </ItemGroup>
   <ItemGroup>
