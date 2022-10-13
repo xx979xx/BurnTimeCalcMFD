@@ -29,7 +29,7 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 	std::string InputUnits =  "yzafpnum_kMGTPEZY;";
 	std::string RightChar = std::string(SearchString.substr(SearchString.length()-1,SearchString.length()));
 	std::string numbers = "0123456789;";
-	//Überprüfe ob der String eine Zahl ist... (check if the string is a number)
+	//ÃœberprÃ¼fe ob der String eine Zahl ist... (check if the string is a number)
 
 
 	if (data->inputmode != INPUTMODE_TARGET )
@@ -50,8 +50,8 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 				SearchString.substr(laufNumber,1) != "8" &&
 				SearchString.substr(laufNumber,1) != "9" &&
 				(
-					SearchString.substr(laufNumber, 1) != "-" && laufNumber != 0 &&
-					(data->inputmode != INPUTMODE_DV && data->inputmode != INPUTMODE_DISTANCE && data->inputmode != INPUTMODE_PERIOD)
+					SearchString.substr(laufNumber, 1) != "-" || laufNumber != 0 || data->inputmode != INPUTMODE_DV &&
+                    data->inputmode != INPUTMODE_DISTANCE && data->inputmode != INPUTMODE_PERIOD
 				)
 			) return false;
 		}
