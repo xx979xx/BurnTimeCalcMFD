@@ -17,8 +17,6 @@ public:
   void Update();
   void ArmAutoBurn();
   void CalcCircular();
-  void CalcDRadDPeri();
-  void CalcPeriod();
   void CalcApses(VESSEL* vessel);
   void CalcIBurn(VESSEL* vessel);
   //double GetStackMass(VESSEL* vessel);
@@ -26,7 +24,8 @@ public:
   void ReGetDataFromSource();
   double GetTimeToIgnition() const;
   void ArmAutopilot();
-  double GetTrueAnomaly(double ma);
+  void CalcDRadDPeri();
+  //double GetTrueAnomaly(double ma);
 
   static const int numEngines;
   static const THGROUP_TYPE groups[6];
@@ -72,9 +71,11 @@ public:
   int otherMFDsel;
   AutopilotRotation autopilot;
 
-  double dDist, Period, dPeriod;
-  //double prev_ma, prev_ea = 0.0;
   ELEMENTS el;
+  double dDist, dPeriod;
+  bool retroBurn;
+  //double prev_ma, prev_ea = 0.0;
+
 
     std::vector<DataSourceBase*> m_dataSources;
 

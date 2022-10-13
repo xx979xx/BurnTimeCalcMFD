@@ -229,7 +229,7 @@ bool BurnTimeMFD::Update(oapi::Sketchpad * skp)
     {
 
         if (otherSrc == NULL)
-            PrintEngUnit(skp, "Target DeltaV:         %7.3f","m/s","ft/s",1,mToft, m_data->dv, 5, line1 );
+            PrintEngUnit(skp, "Target DeltaV:         %7.3f","m/s","ft/s",1,mToft, (m_data->retroBurn ? m_data->dv * -1: m_data->dv), 5, line1 );
         else
         {
             skp->SetTextColor( YELLOW );
@@ -238,7 +238,7 @@ bool BurnTimeMFD::Update(oapi::Sketchpad * skp)
     }
     else
     {
-        PrintEngUnit(skp,"Target DeltaV:         %7.3f","m/s","ft/s",1,mToft, m_data->dv, 5, line1 );
+        PrintEngUnit(skp, "Target DeltaV:         %7.3f", "m/s", "ft/s", 1, mToft, (m_data->retroBurn ? m_data->dv * -1: m_data->dv), 5, line1);
     }
 
 	skp->SetTextColor( (m_data->inputmode==INPUTMODE_EXTRA)?YELLOW:BLUE );
@@ -319,7 +319,7 @@ void BurnTimeMFD::HandlerTargetOrDV()
     m_data->mode = BURNMODE_MAN;
     m_data->otherMFDsel = -1;
     bool ObjectInput (void *id, char *str, void *usrdata);
-    oapiOpenInputBox("Enter dV + yzafpnum kMGTPEZY.",ObjectInput,0,20, (void*)this);
+    oapiOpenInputBox("Enter delta V\nFormat: (-)value(unit:yzafpnum kMGTPEZY)",ObjectInput,0,20, (void*)this);
 }
 
 void BurnTimeMFD::HandlerTimeOfManoeuvre()
@@ -359,6 +359,7 @@ void BurnTimeMFD::HandlerReset()
 	  m_data->IsCircular=false;
       m_data->dDist = 0.0;
       m_data->dPeriod = 0.0;
+      m_data->retroBurn = false;
 }
 
 void BurnTimeMFD::HandlerChangeMode()
@@ -460,7 +461,7 @@ void BurnTimeMFD::HandlerDRadialDistance()
     m_data->mode = BURNMODE_PERI;
     m_data->otherMFDsel = -1;
     bool ObjectInput(void* id, char* str, void* usrdata);
-    oapiOpenInputBox("Enter Radial DISTANCE change(yzafpnum kMGTPEZY):", ObjectInput, 0, 20, (void*)this);
+    oapiOpenInputBox("Enter Radial DISTANCE change:\nFormat: (-)value(unit:yzafpnum kMGTPEZY))", ObjectInput, 0, 20, (void*)this);
 }
 void BurnTimeMFD::HandlerDOrbitPeriod()
 {
@@ -468,7 +469,7 @@ void BurnTimeMFD::HandlerDOrbitPeriod()
     m_data->mode = BURNMODE_PERI;
     m_data->otherMFDsel = -1;
     bool ObjectInput(void* id, char* str, void* usrdata);
-    oapiOpenInputBox("Enter Orbit PERIOD change(yzafpnum kMGTPEZY):", ObjectInput, 0, 20, (void*)this);
+    oapiOpenInputBox("Enter Orbit PERIOD change:\nFormat: (-)value(unit:yzafpnum kMGTPEZY)", ObjectInput, 0, 20, (void*)this);
 }
 
 int BurnTimeMFD::line( int i ) {

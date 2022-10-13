@@ -39,8 +39,8 @@ MFDDataBurnTime::MFDDataBurnTime(VESSEL * vessel)
     BSori = 0;
     velVector = _V(0,0,0);
     dDist = 0.0;
-    Period = 0.0;
     dPeriod = 0.0;
+    retroBurn = false;
 
     m_dataSources.push_back(new DataSourceTransX());
     m_dataSources.push_back(new DataSourceBaseSyncSimple());
@@ -211,7 +211,7 @@ void MFDDataBurnTime::CalcApses(VESSEL* vessel) {
   }
 
   IPeri=-M/n;
-  Period=(2*PI)/n;
+  double Period=(2*PI)/n;
   Rperi=a*(1-e);
   if(e<1) {
     Rapo=a*(1+e);
@@ -254,7 +254,7 @@ void MFDDataBurnTime::CalcDRadDPeri() {
         if (dDist != 0.0) dDist = 0.0;
         return;
     }
-    double Rapse, Vtrgt, Vapse, Atrgt, Ptrgt;
+    double Rapse, Vtrgt, Vapse, Atrgt, Ptrgt, Period;
 
     if (mode == BURNMODE_PERI || BURNMODE_APO)
     {
@@ -268,29 +268,41 @@ void MFDDataBurnTime::CalcDRadDPeri() {
             Rapse = Rapo;
             IReference = IApo;
         }
-        Vapse = sqrt(mu * (2 / Rapse - 1 / a));
         if (inputmode == INPUTMODE_DISTANCE || inputmode == INPUTMODE_PERIOD)
         {
 
             if (inputmode == INPUTMODE_PERIOD)
             {
+                if (dPeriod == 0) return;
+                Period = 2 * PI * sqrt(pow(a, 3) / mu);
                 Ptrgt = Period + dPeriod;
                 Atrgt = cbrt(mu * pow(Ptrgt, 2) / (4 * pow(PI, 2)));
-                dDist = round(fabs(Atrgt - a) * 2 * 1e4) / 1e4;
+                dDist = round((Atrgt - a) * 2 * 1e4) / 1e4;
             }
             else
             {
+                if (dDist == 0) return;
+                Period = 2 * PI * sqrt(pow(a, 3) / mu);
                 Atrgt = a + dDist / 2;
                 Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
-                dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+                dPeriod = round((Ptrgt - Period) * 1e4) / 1e4;
             }
-
-            Vtrgt = sqrt(mu * (2 / Rapse - 1 / Atrgt));
-            dv = round(fabs(Vtrgt - Vapse) * 1e7) / 1e7;
+            Vapse = sqrt(2 * mu / Rapse - mu / a);
+            Vtrgt = sqrt(2 * mu / Rapse - mu / Atrgt);
+            dv = Vtrgt - Vapse;
+            if (dv < 0)
+            {
+                dv = fabs(dv);
+                retroBurn = true;
+            }
+            else retroBurn = false;
         }
         else
         {
-            Atrgt = -Rapse * mu / (Rapse * pow(Vapse + dv, 2) - 2 * mu);
+            if (dv == 0) return;
+            Period = 2 * PI * sqrt(pow(a, 3) / mu);
+            Vapse = sqrt(2 * mu / Rapse - mu / a);
+            Atrgt = -Rapse * mu / (Rapse * pow(Vapse + (dv * retroBurn ? -1 : 1), 2) - 2 * mu);
             Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
             dDist = round(fabs(Atrgt - a) * 2 * 1e4) / 1e4;
             dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;

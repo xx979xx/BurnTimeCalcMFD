@@ -48,8 +48,11 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 				SearchString.substr(laufNumber,1) != "6" &&
 				SearchString.substr(laufNumber,1) != "7" &&
 				SearchString.substr(laufNumber,1) != "8" &&
-				SearchString.substr(laufNumber,1) != "9"
-
+				SearchString.substr(laufNumber,1) != "9" &&
+				(
+					SearchString.substr(laufNumber, 1) != "-" && laufNumber != 0 &&
+					(data->inputmode != INPUTMODE_DV && data->inputmode != INPUTMODE_DISTANCE && data->inputmode != INPUTMODE_PERIOD)
+				)
 			) return false;
 		}
 		double MyExp=-24;
@@ -73,6 +76,13 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 			{
 				data->dv = atof(SearchString.c_str());
 				if (data->dspunit == 1) data->dv = data->dv * 0.3048;
+				if (data->dv < 0) {
+					data->dv = fabs(data->dv);
+					data->retroBurn = true;
+				}
+				else {
+					data->retroBurn = false;
+				}
 			}
 			else if (data->inputmode==INPUTMODE_EXTRA )
 			{
@@ -109,6 +119,13 @@ bool ObjectInput (void *id, char *str, void *usrdata)
 			{
 				data->dv = atof(SearchString.c_str()) * pow(10,MyExp);
 				if (data->dspunit == 1) data->dv = data->dv * 0.3048;
+				if (data->dv < 0) {
+					data->dv = fabs(data->dv);
+					data->retroBurn = true;
+				}
+				else {
+					data->retroBurn = false;
+				}
 			}
 			else if (data->inputmode == INPUTMODE_DISTANCE)
 			{
