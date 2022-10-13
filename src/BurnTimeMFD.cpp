@@ -229,7 +229,7 @@ bool BurnTimeMFD::Update(oapi::Sketchpad * skp)
     {
 
         if (otherSrc == NULL)
-            PrintEngUnit(skp, "Target DeltaV:         %7.3f","m/s","ft/s",1,mToft, (m_data->retroBurn ? m_data->dv * -1: m_data->dv), 5, line1 );
+            PrintEngUnit(skp, "Target DeltaV:         %7.3f","m/s","ft/s",1,mToft, m_data->dv, 5, line1 );
         else
         {
             skp->SetTextColor( YELLOW );
@@ -238,7 +238,7 @@ bool BurnTimeMFD::Update(oapi::Sketchpad * skp)
     }
     else
     {
-        PrintEngUnit(skp, "Target DeltaV:         %7.3f", "m/s", "ft/s", 1, mToft, (m_data->retroBurn ? m_data->dv * -1: m_data->dv), 5, line1);
+        PrintEngUnit(skp,"Target DeltaV:         %7.3f","m/s","ft/s",1,mToft, m_data->dv, 5, line1 );
     }
 
 	skp->SetTextColor( (m_data->inputmode==INPUTMODE_EXTRA)?YELLOW:BLUE );
@@ -248,14 +248,6 @@ bool BurnTimeMFD::Update(oapi::Sketchpad * skp)
 	    PrintEngUnit(skp,"Extra Fuel Mass:       %7.3f","g","lbm", 1000,gTolb,m_data->mextra,5,line19);
 	}
 
-    if (m_data->mode == BURNMODE_PERI || m_data->mode == BURNMODE_APO)// || m_data->mode == BURNMODE_MAN)
-    {
-        skp->SetTextColor((m_data->inputmode == INPUTMODE_DISTANCE) ? YELLOW : GRAY);
-        PrintEngUnit(skp, "Max Altitude Change:   %7.3f", "m", "ft", 1, mToft, m_data->dDist, 5, line2);
-        skp->SetTextColor((m_data->inputmode == INPUTMODE_PERIOD) ? YELLOW : GRAY);
-        PrintEngUnit(skp, "Orbit Period Change:   %7.3f", "s", m_data->dPeriod, 5, line9);
-    }
-    
 
 
 	std::string TargetString;
@@ -319,7 +311,7 @@ void BurnTimeMFD::HandlerTargetOrDV()
     m_data->mode = BURNMODE_MAN;
     m_data->otherMFDsel = -1;
     bool ObjectInput (void *id, char *str, void *usrdata);
-    oapiOpenInputBox("Enter delta V\nFormat: (-)value(unit:yzafpnum kMGTPEZY)",ObjectInput,0,20, (void*)this);
+    oapiOpenInputBox("Enter dV + yzafpnum kMGTPEZY.",ObjectInput,0,20, (void*)this);
 }
 
 void BurnTimeMFD::HandlerTimeOfManoeuvre()
@@ -354,12 +346,9 @@ void BurnTimeMFD::HandlerReset()
 	  m_data->IsEngaged=false;
 	  m_data->IsArmed=false;
 	  m_data->mode=BURNMODE_PERI;
-      m_data->otherMFDsel = -1;
+        m_data->otherMFDsel = -1;
 	  m_data->IManual=0;
 	  m_data->IsCircular=false;
-      m_data->dDist = 0.0;
-      m_data->dPeriod = 0.0;
-      m_data->retroBurn = false;
 }
 
 void BurnTimeMFD::HandlerChangeMode()
@@ -455,23 +444,6 @@ void BurnTimeMFD::HandlerGetFromOtherMFD()
         HandlerAutoBurn();
 }
 
-void BurnTimeMFD::HandlerDRadialDistance()
-{
-    m_data->inputmode = INPUTMODE_DISTANCE;
-    m_data->mode = BURNMODE_PERI;
-    m_data->otherMFDsel = -1;
-    bool ObjectInput(void* id, char* str, void* usrdata);
-    oapiOpenInputBox("Enter Radial DISTANCE change:\nFormat: (-)value(unit:yzafpnum kMGTPEZY))", ObjectInput, 0, 20, (void*)this);
-}
-void BurnTimeMFD::HandlerDOrbitPeriod()
-{
-    m_data->inputmode = INPUTMODE_PERIOD;
-    m_data->mode = BURNMODE_PERI;
-    m_data->otherMFDsel = -1;
-    bool ObjectInput(void* id, char* str, void* usrdata);
-    oapiOpenInputBox("Enter Orbit PERIOD change:\nFormat: (-)value(unit:yzafpnum kMGTPEZY)", ObjectInput, 0, 20, (void*)this);
-}
-
 int BurnTimeMFD::line( int i ) {
   return (int)((float)i*((float)height/20.0));
 }
@@ -481,7 +453,7 @@ int BurnTimeMFD::ButtonMenu (const MFDBUTTONMENU **menu) const {
 }
 
 char *BurnTimeMFD::ButtonLabel (int bt) {
-  //char *label[12] = {"DV","DT","OS","ST","RST", "MD", "ARM","BRN", "CIR","UNT","ENG","EXT", "DRD", "DOP"};
+  //char *label[12] = {"DV","DT","OS","ST","RST", "MD", "ARM","BRN", "CIR","UNT","ENG","EXT"};
   //return (bt < 12 ? label[bt] : 0);
   return gButtons.ButtonLabel(bt);
 }

@@ -24,8 +24,6 @@ public:
   void ReGetDataFromSource();
   double GetTimeToIgnition() const;
   void ArmAutopilot();
-  void CalcDRadDPeri();
-  //double GetTrueAnomaly(double ma);
 
   static const int numEngines;
   static const THGROUP_TYPE groups[6];
@@ -71,10 +69,6 @@ public:
   int otherMFDsel;
   AutopilotRotation autopilot;
 
-  ELEMENTS el;
-  double dDist, dPeriod;
-  bool retroBurn;
-  //double prev_ma, prev_ea = 0.0;
 
 
     std::vector<DataSourceBase*> m_dataSources;
