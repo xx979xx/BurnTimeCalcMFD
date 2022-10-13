@@ -304,8 +304,8 @@ void MFDDataBurnTime::CalcDRadDPeri() {
             Vapse = sqrt(2 * mu / Rapse - mu / a);
             Atrgt = -Rapse * mu / (Rapse * pow(Vapse + (dv * retroBurn ? -1 : 1), 2) - 2 * mu);
             Ptrgt = 2 * PI * sqrt(pow(Atrgt, 3) / mu);
-            dDist = round(fabs(Atrgt - a) * 2 * 1e4) / 1e4;
-            dPeriod = round(fabs(Ptrgt - Period) * 1e4) / 1e4;
+            dDist = round((Atrgt - a) * 2 * 1e4) / 1e4;
+            dPeriod = round((Ptrgt - Period) * 1e4) / 1e4;
         }
     }
     else
