@@ -102,7 +102,7 @@ void MFDDataBurnTime::Update()
     mfinal=mv-(ECutoff-ENow)*mdot;
     msfinal=ms-mv+mfinal;
 	if (msfinal!=0) dv=isp*log(ms/msfinal);
-	else dv=0;
+	else dv=dDist=dPeriod=0.0;
   }
   else
   {

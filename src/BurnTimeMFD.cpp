@@ -461,7 +461,7 @@ void BurnTimeMFD::HandlerDRadialDistance()
     m_data->mode = BURNMODE_PERI;
     m_data->otherMFDsel = -1;
     bool ObjectInput(void* id, char* str, void* usrdata);
-    oapiOpenInputBox("Enter Radial DISTANCE change:\nFormat: (-)value(unit:yzafpnum kMGTPEZY))", ObjectInput, 0, 20, (void*)this);
+    oapiOpenInputBox("Enter Radial DISTANCE change: (-)value(unit:yzafpnum kMGTPEZY)", ObjectInput, 0, 20, (void*)this);
 }
 void BurnTimeMFD::HandlerDOrbitPeriod()
 {
@@ -469,7 +469,7 @@ void BurnTimeMFD::HandlerDOrbitPeriod()
     m_data->mode = BURNMODE_PERI;
     m_data->otherMFDsel = -1;
     bool ObjectInput(void* id, char* str, void* usrdata);
-    oapiOpenInputBox("Enter Orbit PERIOD change:\nFormat: (-)value(unit:yzafpnum kMGTPEZY)", ObjectInput, 0, 20, (void*)this);
+    oapiOpenInputBox("Enter Orbit PERIOD change: (-)value(unit:yzafpnum kMGTPEZY)", ObjectInput, 0, 20, (void*)this);
 }
 
 int BurnTimeMFD::line( int i ) {

@@ -23,15 +23,15 @@ MFDButtonPageBTC::MFDButtonPageBTC()
     RegisterFunction("DV",  OAPI_KEY_V, &BurnTimeMFD::HandlerTargetOrDV);
     RegisterFunction("DT",  OAPI_KEY_T, &BurnTimeMFD::HandlerTimeOfManoeuvre);
     RegisterFunction("RST", OAPI_KEY_R, &BurnTimeMFD::HandlerReset);
-    RegisterFunction("MD",  OAPI_KEY_M, &BurnTimeMFD::HandlerChangeMode);
+    RegisterFunction("MOD", OAPI_KEY_M, &BurnTimeMFD::HandlerChangeMode);
     RegisterFunction("BRN", OAPI_KEY_B, &BurnTimeMFD::HandlerBurnNow);
 
     RegisterFunction("ARM", OAPI_KEY_A, &BurnTimeMFD::HandlerAutoBurn);
     RegisterFunction("CIR", OAPI_KEY_C, &BurnTimeMFD::HandlerAimAutoCirc);
+    RegisterFunction("DRD", OAPI_KEY_D, &BurnTimeMFD::HandlerDRadialDistance);
+    RegisterFunction("DOP", OAPI_KEY_L, &BurnTimeMFD::HandlerDOrbitPeriod);
     RegisterFunction("ENG", OAPI_KEY_E, &BurnTimeMFD::HandlerSelectEngine);
     RegisterFunction("GET", OAPI_KEY_G, &BurnTimeMFD::HandlerGetFromOtherMFD);
-    RegisterFunction("EXT", OAPI_KEY_X, &BurnTimeMFD::HandlerEnterExtraFuel);
-    RegisterFunction("RCS", OAPI_KEY_I, &BurnTimeMFD::HandlerIncludeRCSFuel);
 
 // {"DV","DT","OS","ST","RST", "MD", "ARM","BRN", "CIR","UNT","ENG","EXT"};
     static const MFDBUTTONMENU mnu2[] = {
@@ -47,13 +47,13 @@ MFDButtonPageBTC::MFDButtonPageBTC()
     RegisterPage(mnu2, sizeof(mnu2) / sizeof(MFDBUTTONMENU));
 
     RegisterFunction("PG",  OAPI_KEY_P, &BurnTimeMFD::HandlerSwitchButtonPage);
+    RegisterFunction("EXT", OAPI_KEY_X, &BurnTimeMFD::HandlerEnterExtraFuel);
+    RegisterFunction("RCS", OAPI_KEY_I, &BurnTimeMFD::HandlerIncludeRCSFuel);
     RegisterFunction("ST",  OAPI_KEY_S, &BurnTimeMFD::HandlerTargetForDistanceCalc);
     RegisterFunction("OS",  OAPI_KEY_O, &BurnTimeMFD::HandlerOffsetDistance);
     RegisterFunction("UNT", OAPI_KEY_U, &BurnTimeMFD::HandlerSwitchSI_US);
     //RegisterFunction("AP",  OAPI_KEY_A, &BurnTimeMFD::HandlerAutopilot);
     //RegisterFunction("DAP", OAPI_KEY_D, &BurnTimeMFD::HandlerAutopilotDisable);
-    RegisterFunction("DRD", OAPI_KEY_D, &BurnTimeMFD::HandlerDRadialDistance);
-    RegisterFunction("DOP", OAPI_KEY_L, &BurnTimeMFD::HandlerDOrbitPeriod);
 }
 
 MFDButtonPageBTC::~MFDButtonPageBTC()
